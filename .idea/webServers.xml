@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a713de6a-5300-4e8a-b69a-58ec4d83e8df" name="movieratingserver" url="http://localhost/movieratingwebsite">
+        <fileTransfer mountedRoot="C:\xampp\htdocs\movieratingwebsite" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
