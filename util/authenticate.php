@@ -21,7 +21,9 @@ if (isset($_POST['login'])) {
             $_SESSION['success'] = "You are now logged in.";
             header('location: ../home.php');
         } else {
-            $_SESSION['error'] = "Your Username or Password is incorrect.";
+            // Security Update Requirement
+            $_SESSION['error'] = "Your Username or Password is incorrect. Wait three seconds before trying again.";
+            $_SESSION['locked'] = true;
             header('location: ../login.php');
         }
     }

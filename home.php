@@ -23,6 +23,7 @@
 
 <div class="h-screen flex">
     <!-- Fixed sidebar -->
+    <!-- Friend Requests Requirement -->
     <div class="bg-gray-200 w-1/3 pt-20">
         <?php
         $query = "SELECT * FROM friendship WHERE friend_id = ? AND status = 0";
@@ -52,11 +53,11 @@
                         <input type="hidden" name="status" value="1">
                         <button type="submit" class="bg-green-500 hover:bg-green-500 text-white">Accept</button>
                     </form>
-                    </p>
                 </div>
             </div>
         <?php } ?>
 
+        <!-- Friends' Activity Requirement -->
         <?php
         $query = "SELECT * FROM comment
             WHERE user_id 
@@ -139,8 +140,6 @@
             ?>
         </div>
     </div>
-</div>
-
 </div>
 
 </body>
