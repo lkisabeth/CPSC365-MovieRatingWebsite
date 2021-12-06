@@ -36,16 +36,9 @@ $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "i", $user_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
 $user = mysqli_fetch_assoc($result);
-
 $username = $user['username'];
-
-$query = "SELECT * FROM rating WHERE user_id = ?";
-$stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "i", $user_id);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-$rating = mysqli_fetch_assoc($result);
 ?>
 
 <div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
@@ -81,56 +74,15 @@ $rating = mysqli_fetch_assoc($result);
 </div>
 
 <?php
-$query = "SELECT * FROM movie, rating WHERE movie.id = rating.movie_id AND rating.user_id = ? ORDER BY id ASC LIMIT 10";
+// Get the most recent 10 movies that the user has rated. (call the rating "avg_rating" to conform to movie_list ui component).
+$query = "SELECT movie.*, rating.rating AS avg_rating FROM movie, rating WHERE movie.id = rating.movie_id AND rating.user_id = ? ORDER BY id ASC LIMIT 10";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "i",$user_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
 $movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
-foreach ($movies as $movie) {
-    $id = $movie['id'];
-    $title = $movie['title'];
-    $release_date = date("F j, Y", strtotime($movie['release_date']));
-    $description = $movie['description'];
-    $genre = $movie['genre'];
-    $poster = $movie['poster'];
-
-    $query = "SELECT rating FROM rating WHERE movie_id = ? AND user_id = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ii", $id, $user_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $rating = mysqli_fetch_assoc($result);
-    ?>
-    <div class="bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-
-        <div class="py-3 sm:max-w-xl sm:mx-auto">
-            <div class="bg-white shadow-lg border-gray-100 max-h-80	 border sm:rounded-2xl p-8 flex space-x-8">
-                <div class="h-48 overflow-visible w-1/2">
-                    <a href="movie.php?id=<?php echo $id ?>">
-                        <img class="rounded-3xl shadow-lg" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($poster); ?>" alt="">
-                    </a>
-                </div>
-                <div class="flex flex-col w-1/2 space-y-4">
-                    <div class="flex justify-between items-start">
-                        <a href="movie.php?id=<?php echo $id ?>">
-                            <h2 class="text-3xl font-bold"><?php echo $title ?></h2>
-                        </a>
-                        <div class="bg-yellow-400 font-bold rounded-xl p-2"><?php if (isset($rating)) { echo $rating['rating']; } else { echo 'N/A'; } ?></div>
-                    </div>
-                    <div>
-                        <div class="text-md text-gray-500"><?php echo $genre ?></div>
-                        <div class="text-lg text-gray-800"><?php echo $release_date ?></p></div>
-                    </div>
-                    <p class=" text-gray-400 max-h-60 overflow-scroll"><?php echo $description ?></p>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-    <?php
-}
+require 'ui_components/movie_list.php';
 ?>
 
 </body>
