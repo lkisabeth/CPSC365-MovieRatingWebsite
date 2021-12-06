@@ -62,14 +62,9 @@ $rating = mysqli_fetch_assoc($result);
             <p class="pt-8 text-sm">I'm just like a really cool dog and I want you to know that your love for me is completely justified...</p>
 
             <div class="pt-12 pb-8">
-                <form action="util/friendship.php" method="post">
-                    <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>">
-                    <input type="hidden" name="friend_id" value="<?php echo $user_id ?>">
-                    <input type="hidden" name="status" value="0">
-                    <button type="submit" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
-                        Add as Friend
-                    </button>
-                </form>
+                <button type="submit" id="add_friend" onclick="addFriend(<?php echo $user['id'] ?>, <?php echo $user_id ?>)" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+                    Add as Friend
+                </button>
             </div>
 
         </div>

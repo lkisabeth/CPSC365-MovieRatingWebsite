@@ -31,7 +31,7 @@ foreach ($comments as $comment) {
             <p class="text-grey-darkest leading-normal text-lg"><?php echo $comment_text ?></p>
         </div>
         <div class="text-grey-dark leading-normal text-sm w-2/3">
-            <p> <a href="../user.php?id=<?php echo $commenter['id'] ?>"><?php echo $commenter['username'] ?></a>
+            <p> <a href="user.php?id=<?php echo $commenter['id'] ?>"><?php echo $commenter['username'] ?></a>
                 <span class="mx-1 text-xs">&bull;</span>
                 <?php echo $date ?>
                 <button type="submit" id="add_friend" onclick="addFriend(<?php echo $user['id']?>, <?php echo $commenter['id']?>)" class="flex items-center justify-center bg-green-500 hover:bg-green-700 text-white font-bold rounded py-1 px-2">Add Friend</button>
