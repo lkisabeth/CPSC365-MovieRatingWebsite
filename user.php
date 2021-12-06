@@ -11,6 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>User Profile</title>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="util/scripts.js"></script>
+
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
@@ -59,7 +62,7 @@ $rating = mysqli_fetch_assoc($result);
             <p class="pt-8 text-sm">I'm just like a really cool dog and I want you to know that your love for me is completely justified...</p>
 
             <div class="pt-12 pb-8">
-                <form action="util/add_friend.php" method="post">
+                <form action="util/friendship.php" method="post">
                     <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>">
                     <input type="hidden" name="friend_id" value="<?php echo $user_id ?>">
                     <input type="hidden" name="status" value="0">
@@ -76,7 +79,7 @@ $rating = mysqli_fetch_assoc($result);
     <!--Img Col-->
     <div class="w-full lg:w-2/5">
         <!-- Big profile image for side bar (desktop) -->
-        <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2683&q=80" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
+        <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2683&q=80" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" alt="profile picture">
 
     </div>
 

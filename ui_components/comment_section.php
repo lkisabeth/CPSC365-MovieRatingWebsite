@@ -26,32 +26,21 @@ foreach ($comments as $comment) {
     $likes_count = mysqli_num_rows($result);
     ?>
 
-    <div class="bg-white rounded shadow-lg min-w-full p-8 m-2">
+    <div class="bg-white rounded shadow-lg p-8 m-2">
         <div class="flex justify-between mb-1">
             <p class="text-grey-darkest leading-normal text-lg"><?php echo $comment_text ?></p>
         </div>
-        <div class="text-grey-dark leading-normal text-sm">
-            <p> <a href="user.php?id=<?php echo $commenter['id'] ?>"><?php echo $commenter['username'] ?></a>
+        <div class="text-grey-dark leading-normal text-sm w-2/3">
+            <p> <a href="../user.php?id=<?php echo $commenter['id'] ?>"><?php echo $commenter['username'] ?></a>
                 <span class="mx-1 text-xs">&bull;</span>
                 <?php echo $date ?>
-            <form action="util/add_friend.php" method="post">
-                <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>">
-                <input type="hidden" name="friend_id" value="<?php echo $commenter['id'] ?>">
-                <input type="hidden" name="status" value="0">
-                <input type="hidden" name="movie_id" value="<?php echo $movie_id ?>">
-                <button type="submit">Add Friend</button>
-            </form>
+                <button type="submit" id="add_friend" onclick="addFriend(<?php echo $user['id']?>, <?php echo $commenter['id']?>)" class="flex items-center justify-center bg-green-500 hover:bg-green-700 text-white font-bold rounded py-1 px-2">Add Friend</button>
             </p>
         </div>
-        <div class="flex flex-col items-center">
-            <p class="text-sm text-gray-500"><?php echo $likes_count ?> <span class="text-sm text-gray-500">Likes</span></p>
+        <div class="right w-1/3">
+            <span class="text-sm text-gray-500">Likes: <span id="likes_count"><?php echo $likes_count ?></span></span>
+            <button type="submit" id="like" onclick="likeComment(<?php echo $comment_id; ?>, <?php echo $user['id']; ?>)" class="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-1 px-2">Like</button>
         </div>
-        <form action="util/like.php" method="post">
-            <input type="hidden" name="comment_id" value="<?php echo $comment_id ?>">
-            <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>">
-            <input type="hidden" name="movie_id" value="<?php echo $movie_id ?>">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded">Like</button>
-        </form>
     </div>
 
 <?php } ?>

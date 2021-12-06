@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="util/scripts.js"></script>
+
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
@@ -41,18 +44,14 @@
             $result = mysqli_stmt_get_result($stmt);
             $requester = mysqli_fetch_assoc($result);
             ?>
-            <div class="bg-white rounded shadow-lg min-w-full p-8 m-2">
+            <div id="friend_request" class="bg-white rounded shadow-lg min-w-full p-8 m-2">
                 <div class="flex justify-between mb-1">
                     <p class="text-grey-darkest leading-normal text-lg">Friend Request</p>
                 </div>
                 <div class="text-grey-dark leading-normal text-sm">
-                    <p> <?php echo $requester['username'] ?>
-                    <form action="util/add_friend.php" method="post">
-                        <input type="hidden" name="user_id" value="<?php echo $request['user_id'] ?>">
-                        <input type="hidden" name="friend_id" value="<?php echo $user['id'] ?>">
-                        <input type="hidden" name="status" value="1">
-                        <button type="submit" class="bg-green-500 hover:bg-green-500 text-white">Accept</button>
-                    </form>
+                    <p> <?php echo $requester['username'] ?> </p>
+                    <button type="submit" id="accept_friend" onclick="acceptFriend(<?php echo $request['user_id'] ?>, <?php echo $user['id'] ?>)" class="flex items-center justify-center bg-green-500 hover:bg-green-700 text-white font-bold rounded py-1 px-2">Accept</button>
+                    <button type="submit" id="remove_friend" onclick="removeFriend(<?php echo $request['user_id'] ?>, <?php echo $user['id'] ?>)" class="flex items-center justify-center bg-red-500 hover:bg-red-700 text-white font-bold rounded py-1 px-2">Reject</button>
                 </div>
             </div>
         <?php } ?>

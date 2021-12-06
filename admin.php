@@ -20,7 +20,7 @@
 
 <body class="bg-white font-family-karla h-screen">
 
-<?php require 'util/navbar.php' ?>
+<?php require 'ui_components/navbar.php' ?>
 
 <div class="flex flex-col items-center justify-center pt-20">
     <h1 class="black text-black text-xl font-bold m-6">Add a Movie</h1>
